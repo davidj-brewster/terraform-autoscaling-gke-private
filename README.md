@@ -5,7 +5,7 @@ I gave ChatGPT the challenge to give me an interactive / modular learning exerci
 
 h2. Dependencies
 
-Google Cloud account obviously with the appropriate permissioms to create projects and resources (I use a personal account), gcloud cli for auth login etc.
+Google Cloud account obviously with the appropriate IAM permissions to create projects and resources (I use a personal account), gcloud cli for auth login etc.
 I'm running this on a basic setup:
 * homebrew 
 * terraform v1.5.7 on darwin_arm64
