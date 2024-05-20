@@ -45,3 +45,9 @@ variable "vpc_subnet" {
   default = "default-vpc-subnet-gke-au"
 }
 
+variable "gke_serviceaccount" {
+  type = string
+  description = "Terraform managaed serviceaccount for the compute scope"
+  default = "svcacct-gke-compute-tfpoc-au"
+}
+

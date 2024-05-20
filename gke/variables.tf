@@ -21,16 +21,9 @@ variable "vpc_subnet" {
 
 variable "region" {
   description = "The region in which to create the GKE cluster"
-  default = "australia-southeast1"
 }
 
-variable "subnet_name" {
-  description = "The name of the subnet"
-  type = string
-  default = "gke-vpc-subnet"
-}
-
-variable "serviceaccount" { 
+variable "gke_serviceaccount" { 
   description = "Compute service account for GKE"
   type = string
   default = "gke-svcacct-poccluster"

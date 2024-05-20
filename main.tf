@@ -1,3 +1,12 @@
+terraform {
+  required_providers {
+    google = {
+      source  = "google"
+      version = "~> 5.29.1"
+    }
+  }
+}
+
 module "project" { 
   source = "./project"
   billing_account = var.billing_account
@@ -23,21 +32,20 @@ module "firewall_rules" {
   project_id = var.project_id
   vpc_name = var.vpc_name
   vpc_subnet = var.vpc_subnet
-#  vpc_private_subnet = module.vpc.private_subnet #TBD
 }
 
 module "gke" {
   source = "./gke"
   depends_on = [ 
     module.vpc,
-    module.firewall_rules,
-    module.project
+    module.firewall_rules
   ]
   project_id = var.project_id
   billing_account = var.billing_account
   region = var.region
   vpc_name = var.vpc_name
   vpc_subnet = var.vpc_subnet 
+  gke_serviceaccount = var.gke_serviceaccount
 }
 
 
