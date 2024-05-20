@@ -2,23 +2,23 @@
 resource "google_compute_firewall" "rules_ingress_egressoutbound-https" {
     description        = "example rule"
     destination_ranges = [
-        "1.1.1.1/32"
+        "172.16.0.0/12",
+        "10.0.0.0/8"
     ]
     direction          = "EGRESS"
     disabled           = false
     name               = "egress-allow-outbound-https"
     network            = var.vpc_name
-    priority           = 50
+    priority           = 20
     project            = var.project_id
     source_ranges      = [
-        "10.0.0.0/8"
+        "10.0.0.0/8",
+        "172.16.0.0/12"
     ]
 
     allow {
-        ports    = [
-            "443"
-        ]
-        protocol = "tcp"
+	ports = ["-1"]
+        protocol = "https"
     }
 }
 
@@ -28,7 +28,7 @@ resource "google_compute_firewall" "rules_egress_k8control" {
     description        = "Allow GKE control plane to talk"
     destination_ranges = [
         "10.0.0.0/8",
-        "172.16.0.0/27"
+        "172.16.0.0/12",
     ]
     direction          = "EGRESS"
     disabled           = false
@@ -38,11 +38,11 @@ resource "google_compute_firewall" "rules_egress_k8control" {
     project            = var.project_id
     source_ranges      = [
         "10.0.0.0/8",
-        "172.16.0.0/28"
+        "172.16.0.0/12"
     ]
 
     allow {
-        ports    = [ ]
+        ports = ["-1"]
         protocol = "all"
     }
 }
@@ -51,7 +51,7 @@ resource "google_compute_firewall" "rules_ingress_k8control" {
     description        = "Allow GKE control plane to talk"
     destination_ranges = [
         "10.0.0.0/8",
-        "172.16.0.0/27"
+        "172.16.0.0/12"
     ]
     direction          = "INGRESS"
     disabled           = false
@@ -61,11 +61,11 @@ resource "google_compute_firewall" "rules_ingress_k8control" {
     project            = var.project_id
     source_ranges      = [
         "10.0.0.0/8",
-        "172.16.0.0/28"
+        "172.16.0.0/12"
     ]
 
     allow {
-        ports    = [ ]
+        ports = ["-1"]
         protocol = "all"
     }
 }
@@ -75,7 +75,7 @@ resource "google_compute_firewall" "rules_ssh_rdp_via_cloudconsole" {
     description        = "Allow access to instances from Cloud console"
     destination_ranges = [
         "10.0.0.0/8",
-        "172.16.0.0/27"
+        "172.16.0.0/12"
     ]
     direction          = "INGRESS"
     disabled           = false
@@ -88,7 +88,7 @@ resource "google_compute_firewall" "rules_ssh_rdp_via_cloudconsole" {
     ]
 
     allow {
-        ports    = [ ]
+        ports = ["-1"]
         protocol = "all"
     }
 }
@@ -114,15 +114,14 @@ resource "google_compute_firewall" "egress-within-subnets" {
     ]
 
     allow {
-        ports    = []
         protocol = "icmp"
     }
     allow {
-        ports    = []
+        ports = ["-1"]
         protocol = "tcp"
     }
     allow {
-        ports    = []
+        ports = ["-1"]
         protocol = "udp"
     }
 }
@@ -144,13 +143,11 @@ resource "google_compute_firewall" "ingress-allow-sample-rule" {
     ]
 
     allow {
-        ports    = [
-            "8080"
-        ]
+        ports = ["-1"]
         protocol = "tcp"
     }
     allow {
-        ports    = []
+        ports = ["-1"]
         protocol = "udp"
     }
 }
@@ -172,7 +169,7 @@ resource "google_compute_firewall" "ingress-icmp" {
     ]
 
     allow {
-        ports    = []
+        ports = ["-1"]
         protocol = "icmp"
     }
 }
@@ -194,15 +191,14 @@ resource "google_compute_firewall" "ingress-within-subnets" {
     ]
 
     allow {
-        ports    = []
         protocol = "icmp"
     }
     allow {
-        ports    = []
+        ports = ["-1"]
         protocol = "tcp"
     }
     allow {
-        ports    = []
+        ports = ["-1"]
         protocol = "udp"
     }
 }

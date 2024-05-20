@@ -36,7 +36,7 @@ variable "google_apis" {
 
 variable "region" {
   description = "The region in which to create the GKE cluster"
-  default = "us-west3"
+  default = "us-west4"
 }
 
 variable "vpc_subnet" {

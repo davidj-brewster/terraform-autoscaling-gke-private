@@ -4,6 +4,9 @@ resource "google_container_cluster" "primary" {
   location = var.region
 
   monitoring_service = "none" #for the brave.. but I will install vm
+  monitoring_config {
+    enable_components = []
+  }
 
   network    = var.vpc_name
   #subnetwork = var.vpc_subnet
@@ -30,14 +33,14 @@ resource "google_container_cluster" "primary" {
 
     autoscaling {
       total_min_node_count = 1
-      total_max_node_count = 1
+      total_max_node_count = 2
     }
 
     node_config {
       machine_type = "g1-small" #up to 1vCPU, 1.7GB memory x1 non-preemptible, could also delete it
       disk_size_gb = 20
-      disk_type = "pd-ssd"
-      tags = [ "dedicated", "ssd" ]
+      disk_type = "pd-balanced"
+      tags = [ "dedicated", "pd-balanced" ]
       oauth_scopes = [
         "https://www.googleapis.com/auth/cloud-platform",
       ]
@@ -49,7 +52,7 @@ resource "google_container_node_pool" "pool-spot" {
   cluster    = google_container_cluster.primary.name
   location   = google_container_cluster.primary.location
   name       = "preemptible-pool-small"
-  initial_node_count = 1
+  initial_node_count = 2 
 
   autoscaling {
     total_min_node_count = 2
@@ -80,8 +83,8 @@ resource "google_container_node_pool" "pool-preempt" {
   initial_node_count = 1
 
   autoscaling {
-    total_min_node_count = 1
-    total_max_node_count = 4
+    total_min_node_count = 1 
+    total_max_node_count = 5 
   }
 
   node_config {
@@ -100,11 +103,11 @@ resource "google_container_node_pool" "pool-spot-micro" {
   cluster    = google_container_cluster.primary.name
   location   = google_container_cluster.primary.location
   name       = "preemptible-pool-micro"
-  initial_node_count = 1
+  initial_node_count = 0
 
   autoscaling {
-    total_min_node_count = 1 
-    total_max_node_count = 2 
+    total_min_node_count = 2 
+    total_max_node_count = 5 
   }
 
   node_config {
