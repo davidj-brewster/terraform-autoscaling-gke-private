@@ -39,7 +39,6 @@ variable "region" {
   default = "australia-southeast1"
 }
 
-
 variable "vpc_subnet" {
   type = string
   description = "Subnet name we'll use for GKE"
