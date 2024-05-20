@@ -20,24 +20,17 @@ resource "google_container_cluster" "primary" {
   }
   
 
-  node_config {
-    machine_type = "g1-small" #up to 1vCPU, 1.7GB memory x1 non-preemptible, could also delete it
-    oauth_scopes = [
-      "https://www.googleapis.com/auth/cloud-platform",
-    ]
-  }
-
   node_pool {
     name       = "default-node-pool"
     initial_node_count = 1
 
     autoscaling {
       min_node_count = 1
-      max_node_count = 1
+      max_node_count = 2
     }
 
     node_config {
-      machine_type = "g1-small"
+      machine_type = "g1-small" #up to 1vCPU, 1.7GB memory x1 non-preemptible, could also delete it
       oauth_scopes = [
         "https://www.googleapis.com/auth/cloud-platform",
       ]
