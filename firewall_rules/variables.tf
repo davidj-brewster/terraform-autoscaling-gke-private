@@ -6,7 +6,6 @@ variable project_id {
 variable vpc_name {
   type = string
   description = "Identifier of the VPC network"
-  default = "default-vpc"
 }
 
 variable vpc_subnet {
