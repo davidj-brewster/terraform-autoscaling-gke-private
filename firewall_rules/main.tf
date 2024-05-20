@@ -1,8 +1,8 @@
 # module.firewall_rules.google_compute_firewall.rules_ingress_egress["egress-allow-outbound-https"]:
-resource "google_compute_firewall" "rules_ingress_egress" {
+resource "google_compute_firewall" "egress-allow-outbound-https" {
     description        = "example rule"
     destination_ranges = [
-        "1.1.1.1/32",
+        "1.1.1.1/32"
     ]
     direction          = "EGRESS"
     disabled           = false
@@ -11,22 +11,22 @@ resource "google_compute_firewall" "rules_ingress_egress" {
     priority           = 50
     project            = var.project_id
     source_ranges      = [
-        "10.0.0.0/8",
+        "10.0.0.0/8"
     ]
 
     allow {
         ports    = [
-            "443",
+            "443"
         ]
         protocol = "tcp"
     }
 }
 
 # module.firewall_rules.google_compute_firewall.rules_ingress_egress["egress-within-subnets"]:
-resource "google_compute_firewall" "rules_ingress_egress" {
+resource "google_compute_firewall" "egress-within-subnets" {
     description        = "example rule"
     destination_ranges = [
-        "10.0.0.0/8",
+        "10.0.0.0/8"
     ]
     direction          = "EGRESS"
     disabled           = false
@@ -35,7 +35,7 @@ resource "google_compute_firewall" "rules_ingress_egress" {
     priority           = 100
     project            = var.project_id
     source_ranges      = [
-        "10.0.0.0/8",
+        "10.0.0.0/8"
     ]
 
     allow {
@@ -53,10 +53,10 @@ resource "google_compute_firewall" "rules_ingress_egress" {
 }
 
 # module.firewall_rules.google_compute_firewall.rules_ingress_egress["ingress-allow-sample-rule"]:
-resource "google_compute_firewall" "rules_ingress_egress" {
+resource "google_compute_firewall" "ingress-allow-sample-rule" {
     description        = "just an example"
     destination_ranges = [
-        "10.0.0.0/8",
+        "10.0.0.0/8"
     ]
     direction          = "INGRESS"
     disabled           = false
@@ -65,12 +65,12 @@ resource "google_compute_firewall" "rules_ingress_egress" {
     priority           = 50
     project            = var.project_id
     source_ranges      = [
-        "103.75.11.19/32",
+        "127.0.0.1/32"
     ]
 
     allow {
         ports    = [
-            "8080",
+            "8080"
         ]
         protocol = "tcp"
     }
@@ -81,10 +81,10 @@ resource "google_compute_firewall" "rules_ingress_egress" {
 }
 
 # module.firewall_rules.google_compute_firewall.rules_ingress_egress["ingress-icmp"]:
-resource "google_compute_firewall" "rules_ingress_egress" {
+resource "google_compute_firewall" "ingress-icmp" {
     description        = "just an example"
     destination_ranges = [
-        "10.0.0.18/32",
+        "10.0.0.18/32"
     ]
     direction          = "INGRESS"
     disabled           = false
@@ -93,7 +93,7 @@ resource "google_compute_firewall" "rules_ingress_egress" {
     priority           = 100
     project            = var.project_id
     source_ranges      = [
-        "0.0.0.0/0",
+        "0.0.0.0/0"
     ]
 
     allow {
@@ -103,10 +103,10 @@ resource "google_compute_firewall" "rules_ingress_egress" {
 }
 
 # module.firewall_rules.google_compute_firewall.rules_ingress_egress["ingress-within-subnets"]:
-resource "google_compute_firewall" "rules_ingress_egress" {
+resource "google_compute_firewall" "ingress-within-subnets" {
     description        = "example rule"
     destination_ranges = [
-        "10.0.0.0/8",
+        "10.0.0.0/8"
     ]
     direction          = "INGRESS"
     disabled           = false
@@ -115,7 +115,7 @@ resource "google_compute_firewall" "rules_ingress_egress" {
     priority           = 150
     project            = var.project_id
     source_ranges      = [
-        "10.0.0.0/8",
+        "10.0.0.0/8"
     ]
 
     allow {

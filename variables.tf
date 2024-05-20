@@ -23,15 +23,16 @@ variable "vpc_name" {
 variable "google_apis" {
   description = "Set of extra Google APIs that need to be enabled"
   default = [ 
-    "container.googleapis.com"
-    "cloudbuild.googleapis.com"
-    "run.googleapis.com"
-    "alloydb.googleapis.com"
-    "containerregistry.googleapis.com"
-    "compute.googleapis.com"
-    "dns.googleapis.com"
+    "container.googleapis.com",
+    "cloudbuild.googleapis.com",
+    "run.googleapis.com",
+    "alloydb.googleapis.com",
+    "containerregistry.googleapis.com",
+    "compute.googleapis.com",
+    "dns.googleapis.com",
     "iam.googleapis.com"
-]}
+  ]
+}
 
 variable "region" {
   description = "The region in which to create the GKE cluster"

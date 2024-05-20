@@ -10,11 +10,12 @@ module "vpc" {
   project_id = var.project_id
   source = "./vpc"
   depends_on = [ module.project ]
+}
 
 module "firewall_rules" {
   source = "./firewall_rules"
   depends_on = [ 
-    module.project 
+    module.project,
     module.vpc
   ]
   project_id = var.project_id
@@ -26,8 +27,8 @@ module "firewall_rules" {
 module "gke" {
   source = "./gke"
   depends_on = [ 
-    module.vpc 
-    module.firewall_rules  
+    module.vpc,
+    module.firewall_rules,
     module.project
   ]
   project_id = var.project_id

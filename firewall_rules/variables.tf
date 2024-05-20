@@ -14,7 +14,7 @@ variable vpc_name {
   default = "default-vpc"
 }
 
-variable "subnet_name" {
+variable subnet_name {
   description = "The name of the subnet"
   type = string
 }
