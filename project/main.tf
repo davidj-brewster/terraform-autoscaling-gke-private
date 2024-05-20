@@ -1,5 +1,5 @@
 resource "google_project" "default" {
-  name       = "chess demo"
+  name       = var.project_name
   project_id = var.project_id
   billing_account     = var.billing_account
 }

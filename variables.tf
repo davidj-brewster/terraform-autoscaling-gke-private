@@ -8,6 +8,12 @@ variable "project_id" {
   description = "The ID of the project that is created via terraform"
 }
 
+variable "project_name" {
+  type = string
+  description = "Project Name"
+  default = "Demo Project - Terraform + GCP + GKE + .."
+}
+
 variable "vpc_name" {
   type = string
   description = "Identifier of the VPC network"

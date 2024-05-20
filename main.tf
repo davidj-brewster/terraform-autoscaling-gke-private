@@ -1,17 +1,18 @@
 module "project" { 
-  source = './project'
+  source = "./project"
   billing_account = var.billing_account
   project_id = var.project_id
+  project_name = var.project_name
   google_apis = var.google_apis
 }
 
 module "vpc" { 
   project_id = var.project_id
-  source = './vpc'
+  source = "./vpc"
   depends_on = [ module.project ]
 
 module "firewall_rules" {
-  source = './firewall_rules'
+  source = "./firewall_rules"
   depends_on = [ 
     module.project 
     module.vpc
@@ -23,7 +24,7 @@ module "firewall_rules" {
 }
 
 module "gke" {
-  source = './gke'
+  source = "./gke"
   depends_on = [ 
     module.vpc 
     module.firewall_rules  
