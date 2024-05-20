@@ -9,6 +9,7 @@ module "project" {
 module "vpc" { 
   project_id = var.project_id
   vpc_name = var.vpc_name
+  vpc_subnet = var.vpc_subnet
   source = "./vpc"
   depends_on = [ module.project ]
 }

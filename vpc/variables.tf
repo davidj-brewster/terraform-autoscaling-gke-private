@@ -8,7 +8,7 @@ variable vpc_name {
   description = "Identifier of the VPC network"
 }
 
-variable subnet_name {
+variable vpc_subnet {
   description = "The name of the subnet"
   type = string
 }

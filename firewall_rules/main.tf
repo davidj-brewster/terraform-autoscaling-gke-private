@@ -1,5 +1,5 @@
 # module.firewall_rules.google_compute_firewall.rules_ingress_egress["egress-allow-outbound-https"]:
-resource "google_compute_firewall" "egress-allow-outbound-https" {
+resource "google_compute_firewall" "rules_ingress_egressoutbound-https" {
     description        = "example rule"
     destination_ranges = [
         "1.1.1.1/32"

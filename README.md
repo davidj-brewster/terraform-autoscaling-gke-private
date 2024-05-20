@@ -13,11 +13,15 @@ I'm running this on a basic setup:
 
 ** Usage
 
-Update variables in root level `variables.tf` file, execute `terraform init` and then
+Authenticate as normal with the gcloud client i.e., gcloud auth login.
+
+Verify/update "default" variables within the root level `variables.tf` file, execute `terraform init` and then run:
 ```
-terraform (plan|apply) var="billing_account=[[billing-account-id]]" -var="project_id=[[your chosen project-id]]"
+terraform (plan|apply) -var="billing_account=[[billing-account-id]]" -var="project_id=[[your chosen project-id]]"
 ```
+This will create the GCP project as well as all of all of the modules.
+
 
 ** Cleanup 
 
-`terraform destroy` will uninstall all deployed artifacts *including the GCP project*.
+`terraform destroy` will uninstall all deployed artifacts *including the GCP project*. If you do accidentally delete a project you can usually recover it for a while on GCP through the console.

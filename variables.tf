@@ -11,7 +11,7 @@ variable "project_id" {
 variable "project_name" {
   type = string
   description = "Project Name"
-  default = "Demo Project - Terraform + GCP + GKE + .."
+  default = "GCP Terraform Setup Project"
 }
 
 variable "vpc_name" {
