@@ -36,18 +36,18 @@ variable "google_apis" {
 
 variable "region" {
   description = "The region in which to create the GKE cluster"
-  default = "australia-southeast1"
+  default = "us-west3"
 }
 
 variable "vpc_subnet" {
   type = string
   description = "Subnet name we'll use for GKE"
-  default = "default-vpc-subnet-gke-au"
+  default = "default-vpc-subnet-gke-us"
 }
 
 variable "gke_serviceaccount" {
   type = string
   description = "Terraform managaed serviceaccount for the compute scope"
-  default = "svcacct-gke-compute-tfpoc-au"
+  default = "svcacct-gke-compute-tfpoc-us"
 }
 

@@ -29,13 +29,14 @@ resource "google_container_cluster" "primary" {
     initial_node_count = 1
 
     autoscaling {
-      min_node_count = 1
-      max_node_count = 2
+      total_min_node_count = 1
+      total_max_node_count = 2
     }
 
     node_config {
       machine_type = "g1-small" #up to 1vCPU, 1.7GB memory x1 non-preemptible, could also delete it
-      disk_size_gb = 10
+      disk_size_gb = 15
+      disk_type = "pd-ssd"
       oauth_scopes = [
         "https://www.googleapis.com/auth/cloud-platform",
       ]
@@ -50,14 +51,15 @@ resource "google_container_node_pool" "preemptible_pool-sm" {
   initial_node_count = 1
 
   autoscaling {
-    min_node_count = 1 
-    max_node_count = 3
+    total_min_node_count = 0
+    total_max_node_count = 3
   }
 
   node_config {
     preemptible  = true
     machine_type = "g1-small"
-    disk_size_gb = 10
+    disk_size_gb = 15
+    disk_type = "pd-ssd"
     oauth_scopes = [
       "https://www.googleapis.com/auth/cloud-platform",
     ]
@@ -69,17 +71,19 @@ resource "google_container_node_pool" "preemptible_pool-tn" {
   cluster    = google_container_cluster.primary.name
   location   = google_container_cluster.primary.location
   name       = "preemptible-pool-micro"
-  initial_node_count = 2
+  initial_node_count = 3
 
   autoscaling {
-    min_node_count = 1 
-    max_node_count = 6
+    total_min_node_count = 2
+    total_max_node_count = 6
   }
 
   node_config {
     preemptible  = true
-    machine_type = "f1-micro" #0.2 vCPU and 0.6 GB of RAM
-    disk_size_gb = 10
+#    machine_type = "f1-micro" #0.2 vCPU and 0.6 GB of RAM #unavailable
+    machine_type = "g1-small"
+    disk_size_gb = 15
+    disk_type = "pd-balanced"
     oauth_scopes = [
       "https://www.googleapis.com/auth/cloud-platform",
     ]

@@ -22,6 +22,81 @@ resource "google_compute_firewall" "rules_ingress_egressoutbound-https" {
     }
 }
 
+#172.16.0.0/28
+
+resource "google_compute_firewall" "rules_egress_k8control" {
+    description        = "Allow GKE control plane to talk"
+    destination_ranges = [
+        "10.0.0.0/8",
+        "172.16.0.0/27"
+    ]
+    direction          = "EGRESS"
+    disabled           = false
+    name               = "egress-allow-k8s-controlplane"
+    network            = var.vpc_name
+    priority           = 30
+    project            = var.project_id
+    source_ranges      = [
+        "10.0.0.0/8",
+        "172.16.0.0/28"
+    ]
+
+    allow {
+        ports    = [ ]
+        protocol = "all"
+    }
+}
+
+resource "google_compute_firewall" "rules_ingress_k8control" {
+    description        = "Allow GKE control plane to talk"
+    destination_ranges = [
+        "10.0.0.0/8",
+        "172.16.0.0/27"
+    ]
+    direction          = "INGRESS"
+    disabled           = false
+    name               = "ingress-allow-k8s-controlplane"
+    network            = var.vpc_name
+    priority           = 30
+    project            = var.project_id
+    source_ranges      = [
+        "10.0.0.0/8",
+        "172.16.0.0/28"
+    ]
+
+    allow {
+        ports    = [ ]
+        protocol = "all"
+    }
+}
+
+#35.235.240.0/20
+resource "google_compute_firewall" "rules_ssh_rdp_via_cloudconsole" {
+    description        = "Allow access to instances from Cloud console"
+    destination_ranges = [
+        "10.0.0.0/8",
+        "172.16.0.0/27"
+    ]
+    direction          = "INGRESS"
+    disabled           = false
+    name               = "ingress-allow-cloud-console-ssh"
+    network            = var.vpc_name
+    priority           = 40
+    project            = var.project_id
+    source_ranges      = [
+        "35.235.240.0/20"
+    ]
+
+    allow {
+        ports    = [ ]
+        protocol = "all"
+    }
+}
+
+
+#172.16.0.0/28
+
+
 # module.firewall_rules.google_compute_firewall.rules_ingress_egress["egress-within-subnets"]:
 resource "google_compute_firewall" "egress-within-subnets" {
     description        = "example rule"
