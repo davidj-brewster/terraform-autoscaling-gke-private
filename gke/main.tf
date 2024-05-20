@@ -4,7 +4,7 @@ resource "google_container_cluster" "primary" {
   location = var.region
 
   network    = var.vpc_name
-  subnetwork = var.vpc_subnet
+  #subnetwork = var.vpc_subnet
 
   private_cluster_config {
     enable_private_endpoint = true
@@ -31,6 +31,7 @@ resource "google_container_cluster" "primary" {
 
     node_config {
       machine_type = "g1-small" #up to 1vCPU, 1.7GB memory x1 non-preemptible, could also delete it
+      disk_size = 10
       oauth_scopes = [
         "https://www.googleapis.com/auth/cloud-platform",
       ]
@@ -52,6 +53,7 @@ resource "google_container_node_pool" "preemptible_pool-sm" {
   node_config {
     preemptible  = true
     machine_type = "g1-small"
+    disk_size = 10
     oauth_scopes = [
       "https://www.googleapis.com/auth/cloud-platform",
     ]
@@ -73,6 +75,7 @@ resource "google_container_node_pool" "preemptible_pool-tn" {
   node_config {
     preemptible  = true
     machine_type = "f1-micro" #0.2 vCPU and 0.6 GB of RAM
+    disk_size = 10
     oauth_scopes = [
       "https://www.googleapis.com/auth/cloud-platform",
     ]
