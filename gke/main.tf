@@ -3,7 +3,7 @@ resource "google_container_cluster" "primary" {
   name     = "private-gke-cluster-hybrid-premptible"
   location = var.region
 
-  monitoring_service = "none"
+  #monitoring_service = "none" #for the brave.. rather better to adjust sinks to filter out 90% of logs or such
 
   network    = var.vpc_name
   #subnetwork = var.vpc_subnet
@@ -26,11 +26,11 @@ resource "google_container_cluster" "primary" {
 
   node_pool {
     name       = "default-node-pool"
-    initial_node_count = 1
+    initial_node_count = 0
 
     autoscaling {
       total_min_node_count = 1
-      total_max_node_count = 2
+      total_max_node_count = 1
     }
 
     node_config {
@@ -48,11 +48,11 @@ resource "google_container_node_pool" "preemptible_pool-sm" {
   cluster    = google_container_cluster.primary.name
   location   = google_container_cluster.primary.location
   name       = "preemptible-pool-small"
-  initial_node_count = 1
+  initial_node_count = 0
 
   autoscaling {
-    total_min_node_count = 0
-    total_max_node_count = 3
+    total_min_node_count = 2
+    total_max_node_count = 4
   }
 
   node_config {
@@ -71,7 +71,7 @@ resource "google_container_node_pool" "preemptible_pool-tn" {
   cluster    = google_container_cluster.primary.name
   location   = google_container_cluster.primary.location
   name       = "preemptible-pool-micro"
-  initial_node_count = 3
+  initial_node_count = 0
 
   autoscaling {
     total_min_node_count = 2
