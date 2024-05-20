@@ -8,6 +8,7 @@ module "project" {
 
 module "vpc" { 
   project_id = var.project_id
+  vpc_name = var.vpc_name
   source = "./vpc"
   depends_on = [ module.project ]
 }
@@ -19,9 +20,9 @@ module "firewall_rules" {
     module.vpc
   ]
   project_id = var.project_id
-  vpc_name = module.vpc.vpc_name
-  vpc_subnet = module.vpc.vpc_subnet
-  vpc_private_subnet = module.vpc.private_subnet
+  vpc_name = var.vpc_name
+  vpc_subnet = var.vpc_subnet
+#  vpc_private_subnet = module.vpc.private_subnet #TBD
 }
 
 module "gke" {
@@ -34,8 +35,8 @@ module "gke" {
   project_id = var.project_id
   billing_account = var.billing_account
   region = var.region
-  vpc_name = module.vpc.vpc_name
-  vpc_subnet = module.vpc.vpc_subnet 
+  vpc_name = var.vpc_name
+  vpc_subnet = var.vpc_subnet 
 }
 
 

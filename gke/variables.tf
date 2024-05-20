@@ -14,6 +14,11 @@ variable "vpc_name" {
   default = "default-vpc"
 }
 
+variable "vpc_subnet" {
+  type = string
+  description = "Subnet name we'll use for GKE"
+}
+
 variable "region" {
   description = "The region in which to create the GKE cluster"
   default = "australia-southeast1"

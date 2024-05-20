@@ -39,10 +39,9 @@ variable "region" {
   default = "australia-southeast1"
 }
 
-variable "subnet_name" {
-  description = "The name of the subnet"
+variable "vpc_subnet" {
   type = string
-  default = "gke-vpc-subnet"
+  description = "Subnet name we'll use for GKE"
+  default = "default-vpc-subnet-gke-au"
 }
-
 

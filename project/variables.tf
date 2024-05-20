@@ -1,4 +1,4 @@
-variable "gcp_service_list" {
+variable google_apis {
   description ="The list of non-standard installed apis necessary for the project"
   type = list(string)
   default = []
