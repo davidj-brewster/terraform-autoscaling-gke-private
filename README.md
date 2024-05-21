@@ -29,6 +29,7 @@ terraform (plan|apply) -var="billing_account=[[billing-account-id]]" -var="proje
 ```
 This will create the GCP project as well as all of all of the modules.
 
+As this is a private cluster, if you want to access it via google cloud shell you need to enable that following Google's instructions at https://cloud.google.com/kubernetes-engine/docs/tutorials/private-cluster-bastion 
 
 ** Cleanup 
 

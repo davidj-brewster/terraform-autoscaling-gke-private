@@ -50,27 +50,23 @@ resource "google_container_cluster" "primary" {
   }
 }
 
-resource "google_container_node_pool" "pool-spot" {
+resource "google_container_node_pool" "pool-spot-e2" {
   cluster    = google_container_cluster.primary.name
   location   = google_container_cluster.primary.location
-  name       = "spot-pool-n4-standard-2-1"
+  name       = "np-spot-e2-small"
   initial_node_count = 1
 
   autoscaling {
-    total_min_node_count = 2
-    total_max_node_count = 6
+    total_min_node_count = 1
+    total_max_node_count = 3
   }
   
-#  vertical_pod_autoscaling {
-#    enabled = true
-#  }
-
   node_config {
     spot = true
-    machine_type = "n4-standard-2"
+    machine_type = "e2-small"
     disk_size_gb = 15
-    disk_type = "hyperdisk-balanced"
-    tags = [ "spot", "hyperdisk-balanced","n4-standard-2" ]
+    disk_type = "pd-balanced"
+    tags = [ "spot", "pd-balanced","e2-small" ]
     oauth_scopes = [
       "https://www.googleapis.com/auth/cloud-platform",
     ]
@@ -81,12 +77,12 @@ resource "google_container_node_pool" "pool-spot" {
 resource "google_container_node_pool" "pool-preemptible-n4-standard-2" {
   cluster    = google_container_cluster.primary.name
   location   = google_container_cluster.primary.location
-  name       = "preemptible-pool-n4-standard-2"
-  initial_node_count = 1
+  name       = "np-preemptible-n4-standard-2"
+  initial_node_count = 0
 
   autoscaling {
     total_min_node_count = 0
-    total_max_node_count = 6
+    total_max_node_count = 2
   }
 
   node_config {
@@ -101,24 +97,23 @@ resource "google_container_node_pool" "pool-preemptible-n4-standard-2" {
   }
 }
 
-resource "google_container_node_pool" "pool-spot-micro" {
+resource "google_container_node_pool" "pool-spot-n4-standard-2" {
   cluster    = google_container_cluster.primary.name
   location   = google_container_cluster.primary.location
-  name       = "preemptible-spot-g1-small"
-  initial_node_count = 1
+  name       = "np-spot-n4-standard-2"
+  initial_node_count = 0
 
   autoscaling {
     total_min_node_count = 1
-    total_max_node_count = 6
+    total_max_node_count = 3
   }
 
   node_config {
     spot = true
-#    machine_type = "f1-micro" #0.2 vCPU and 0.6 GB of RAM
-    machine_type = "g1-small" 
-    disk_size_gb = 10
-    tags = [ "spot", "pd-standard","g1-small" ]
-    disk_type = "pd-standard"
+    machine_type = "n4-standard-2" 
+    disk_size_gb = 15
+    tags = [ "spot", "hyperdisk-balanced","n4-standard-2" ]
+    disk_type = "hyperdisk-balanced"
     oauth_scopes = [
       "https://www.googleapis.com/auth/cloud-platform",
     ]
