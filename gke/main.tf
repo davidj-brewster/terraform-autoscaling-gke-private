@@ -53,7 +53,7 @@ resource "google_container_cluster" "primary" {
 resource "google_container_node_pool" "pool-spot" {
   cluster    = google_container_cluster.primary.name
   location   = google_container_cluster.primary.location
-  name       = "preemptible-pool-small"
+  name       = "spot-pool-n4-standard-2-1"
   initial_node_count = 1
 
   autoscaling {
@@ -78,10 +78,10 @@ resource "google_container_node_pool" "pool-spot" {
 }
 
 
-resource "google_container_node_pool" "pool-preempt" {
+resource "google_container_node_pool" "pool-preemptible-n4-standard-2" {
   cluster    = google_container_cluster.primary.name
   location   = google_container_cluster.primary.location
-  name       = "preemptible-pool-micro"
+  name       = "preemptible-pool-n4-standard-2"
   initial_node_count = 1
 
   autoscaling {
@@ -104,7 +104,7 @@ resource "google_container_node_pool" "pool-preempt" {
 resource "google_container_node_pool" "pool-spot-micro" {
   cluster    = google_container_cluster.primary.name
   location   = google_container_cluster.primary.location
-  name       = "preemptible-pool-micro"
+  name       = "preemptible-spot-g1-small"
   initial_node_count = 1
 
   autoscaling {
