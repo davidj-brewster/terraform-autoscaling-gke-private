@@ -3,8 +3,10 @@ resource "google_container_cluster" "primary" {
   name     = "private-gke-cluster-hybrid-premptible"
   location = var.region
 
-  monitoring_service = "none" #for the brave.. but I will install vm
   monitoring_config {
+    enable_components = []
+  }
+  logging_config {
     enable_components = []
   }
 
@@ -33,14 +35,14 @@ resource "google_container_cluster" "primary" {
 
     autoscaling {
       total_min_node_count = 1
-      total_max_node_count = 2
+      total_max_node_count = 3
     }
 
     node_config {
-      machine_type = "g1-small" #up to 1vCPU, 1.7GB memory x1 non-preemptible, could also delete it
+      machine_type = "e2-medium" #2 shared vCPU up to 100%, 4GB memory
       disk_size_gb = 20
-      disk_type = "pd-balanced"
-      tags = [ "dedicated", "pd-balanced" ]
+      disk_type = "pd-ssd"
+      tags = [ "dedicated", "pd-ssd", "e2-medium" ]
       oauth_scopes = [
         "https://www.googleapis.com/auth/cloud-platform",
       ]
@@ -52,11 +54,11 @@ resource "google_container_node_pool" "pool-spot" {
   cluster    = google_container_cluster.primary.name
   location   = google_container_cluster.primary.location
   name       = "preemptible-pool-small"
-  initial_node_count = 2 
+  initial_node_count = 1
 
   autoscaling {
     total_min_node_count = 2
-    total_max_node_count = 4
+    total_max_node_count = 6
   }
   
 #  vertical_pod_autoscaling {
@@ -65,10 +67,10 @@ resource "google_container_node_pool" "pool-spot" {
 
   node_config {
     spot = true
-    machine_type = "g1-small"
+    machine_type = "n4-standard-2"
     disk_size_gb = 15
     disk_type = "pd-ssd"
-    tags = [ "spot", "pd-ssd" ]
+    tags = [ "spot", "pd-balanced","n4-standard-2" ]
     oauth_scopes = [
       "https://www.googleapis.com/auth/cloud-platform",
     ]
@@ -83,16 +85,16 @@ resource "google_container_node_pool" "pool-preempt" {
   initial_node_count = 1
 
   autoscaling {
-    total_min_node_count = 1 
-    total_max_node_count = 5 
+    total_min_node_count = 0
+    total_max_node_count = 6
   }
 
   node_config {
     preemptible  = true
-    machine_type = "g1-small"
+    machine_type = "n4-standard-2"
     disk_size_gb = 15
-    tags = [ "preemptible", "pd-balanced" ]
-    disk_type = "pd-balanced"
+    tags = [ "preemptible", "pd-balanced", "n4-standard-2" ]
+    disk_type = "pd-ssd"
     oauth_scopes = [
       "https://www.googleapis.com/auth/cloud-platform",
     ]
@@ -103,19 +105,20 @@ resource "google_container_node_pool" "pool-spot-micro" {
   cluster    = google_container_cluster.primary.name
   location   = google_container_cluster.primary.location
   name       = "preemptible-pool-micro"
-  initial_node_count = 0
+  initial_node_count = 1
 
   autoscaling {
-    total_min_node_count = 2 
-    total_max_node_count = 5 
+    total_min_node_count = 1
+    total_max_node_count = 6
   }
 
   node_config {
     spot = true
-    machine_type = "f1-micro" #0.2 vCPU and 0.6 GB of RAM
+#    machine_type = "f1-micro" #0.2 vCPU and 0.6 GB of RAM
+    machine_type = "g1-small" 
     disk_size_gb = 10
-    tags = [ "spot", "pd-ssd","f1-micro" ]
-    disk_type = "pd-ssd"
+    tags = [ "spot", "pd-standard","g1-small" ]
+    disk_type = "pd-standard"
     oauth_scopes = [
       "https://www.googleapis.com/auth/cloud-platform",
     ]
