@@ -69,8 +69,8 @@ resource "google_container_node_pool" "pool-spot" {
     spot = true
     machine_type = "n4-standard-2"
     disk_size_gb = 15
-    disk_type = "pd-ssd"
-    tags = [ "spot", "pd-balanced","n4-standard-2" ]
+    disk_type = "hyperdisk-balanced"
+    tags = [ "spot", "hyperdisk-balanced","n4-standard-2" ]
     oauth_scopes = [
       "https://www.googleapis.com/auth/cloud-platform",
     ]
@@ -93,8 +93,8 @@ resource "google_container_node_pool" "pool-preemptible-n4-standard-2" {
     preemptible  = true
     machine_type = "n4-standard-2"
     disk_size_gb = 15
-    tags = [ "preemptible", "pd-balanced", "n4-standard-2" ]
-    disk_type = "pd-ssd"
+    tags = [ "preemptible", "hyperdisk-balanced", "n4-standard-2" ]
+    disk_type = "hyperdisk-balanced"
     oauth_scopes = [
       "https://www.googleapis.com/auth/cloud-platform",
     ]
