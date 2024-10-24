@@ -14,15 +14,6 @@ resource "google_container_cluster" "primary" {
   #subnetwork = var.vpc_subnet
   deletion_protection = false
 
-  ## optionally, add an include list of zones for the additional nodepool (not tested yet)
-  ## with the flag remove_default_node_pool = true, you would be able to have this nodepool replace the one created upon provisioning
-  ## and by setting total_min_node_count + total_max_node_count you get more granular control of both the number of nodes in the nodepool
-  ## and where they are placed  e.g., 4 nodes total split across 2 zones within the 1 region, excluding a "bad" zone
-
-  # node_locations = [
-  #   "us-central1-c",
-  # ]
-
   remove_default_node_pool = false 
 
   private_cluster_config {
@@ -64,6 +55,16 @@ resource "google_container_node_pool" "pool-spot-e2" {
   location   = google_container_cluster.primary.location
   name       = "np-spot-e2-small"
   initial_node_count = 1
+
+  ## optionally, add an include list of zones for the additional nodepool (not tested yet)
+  ## with the flag remove_default_node_pool = true, you would be able to have this nodepool replace the one created upon provisioning
+  ## and by setting initial_node_count, total_min_node_count + total_max_node_count you get more granular control of both the number of nodes in the nodepool
+  ## and where they are placed  e.g., 4 nodes total split across 2 zones within the 1 region, excluding a "bad" zone
+
+  # node_locations = [
+  #   "us-central1-c", #zones not regions
+  # ]
+
 
   autoscaling {
     total_min_node_count = 1
