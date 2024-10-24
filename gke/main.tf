@@ -14,6 +14,11 @@ resource "google_container_cluster" "primary" {
   #subnetwork = var.vpc_subnet
   deletion_protection = false
 
+  # optionally, add an include list of zones for the additional nodepool (not tested yet)
+  # node_locations = [
+  #   "us-central1-c",
+  # ]
+
   remove_default_node_pool = false 
 
   private_cluster_config {
