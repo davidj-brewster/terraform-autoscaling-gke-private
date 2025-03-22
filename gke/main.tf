@@ -3,6 +3,9 @@ resource "google_container_cluster" "primary" {
   name                    = "private-gke-cluster-hybrid-premptible"
   location                = var.region
   enable_kubernetes_alpha = false
+  network_policy {
+    enabled = true
+  }
   resource_labels = {
     environment = "testing"
     team        = "myteam"
@@ -16,7 +19,7 @@ resource "google_container_cluster" "primary" {
   logging_config {
     enable_components = []
   }
-
+  enable_binary_authorization = true
   network = var.vpc_name
   #subnetwork = var.vpc_subnet
   deletion_protection = false
