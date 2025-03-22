@@ -7,7 +7,7 @@ Some special things about this setup
 - Pretty quick to take up and down depending on the GCP region and when you do it
 - Uses a combination of the smallest GCE nodes as workers but with a pretty flexible scaling policy for the 2 preemptible node pools.
 - Is flexible enough to setup a much larger setup in any hybrid preemptible/spot/dedicated/CUD node permutations but also small enough that you can play around with a larger "cluster" without it costing too much at all.
-- Includes a github workflow upon push that runs `terraform validate`, `terraform fmt --recursive`, 'tflint` and `checkov` tests. Various of the checkov tests are skipped because, well, they don't apply to this extremely simple proof-of-concept, but if concerned please take a look at the tflint github action and uncomment those that you want to run.
+- Includes a github workflow upon push that runs `terraform validate`, `terraform fmt --recursive`, `tflint` and `checkov` tests. Various of the checkov tests are skipped because, well, there are _so_ many of them, and some don't need to apply to this extremely simple proof-of-concept, but if concerned please take a look at the tflint github action and uncomment those that you want to run.
   
 ** Dependencies
 
