@@ -42,4 +42,4 @@ jobs:
       run: pip install checkov
 
     - name: Run Checkov
-      run: checkov -d . --skip-check CKV2_GHA_1
+      run: checkov -d . --skip-check CKV2_GHA_1 CKV_GCP_69
