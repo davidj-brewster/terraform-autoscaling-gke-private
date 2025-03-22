@@ -1,7 +1,5 @@
 # terraform-autoscaling-gke-private
-Mucking around with terraform scripts to orchestrate different components on GCP, namely an application workload running across a cluster backed by several GKE nodepools. 
-
-I gave ChatGPT the challenge to give me an interactive / modular learning exercise to get more hands on familiar with both terraform, gcp networking and the details of GKE cluster setup. I also want to see how a mixed GKE cluster with preemptible and non-preemptible nodes works out as a curiousity.
+Terraform scripts to orchestrate different components on GCP, namely an application workload running across a cluster backed by several GKE nodepools. Admittedly, this solution works but there is room for improvement around the gke module and probably the networking.
 
 Some special things about this setup 
 - Fully managed by Terraform apply/destroy
@@ -9,6 +7,7 @@ Some special things about this setup
 - Pretty quick to take up and down depending on the GCP region and when you do it
 - Uses a combination of the smallest GCE nodes as workers but with a pretty flexible scaling policy for the 2 preemptible node pools.
 - Is flexible enough to setup a much larger setup in any hybrid preemptible/spot/dedicated/CUD node permutations but also small enough that you can play around with a larger "cluster" without it costing too much at all.
+- Includes a github workflow upon push that runs `terraform validate`, `terraform fmt --recursive`, 'tflint` and `checkov` tests. Various of the checkov tests are skipped because, well, they don't apply to this extremely simple proof-of-concept, but if concerned please take a look at the tflint github action and uncomment those that you want to run.
   
 ** Dependencies
 
@@ -17,7 +16,8 @@ I'm running this on a basic setup:
 * homebrew 
 * terraform v1.5.7 on darwin_arm64
 * connect "locally" with kubectl via cloud shell, or using gke-gcloud-auth-plugin
-* provider `registry.terraform.io/hashicorp/google v5.29.1` is the only terraform dependency
+* provider `registry.terraform.io/hashicorp/google v6.26.0` is the only terraform dependency
+* tflint
 
 ** Usage
 
@@ -34,6 +34,10 @@ As this is a private cluster, if you want to access it via google cloud shell yo
 ** Cleanup 
 
 `terraform destroy` will uninstall all deployed artifacts *including the GCP project*. If you do accidentally delete a project you can usually recover it for a while on GCP through the console.
+
+** Context / rationale
+
+I gave ChatGPT the challenge to give me an interactive / modular learning exercise to get more hands on familiar with both terraform, gcp networking and the details of GKE cluster setup. I also want to see how a mixed GKE cluster with preemptible and non-preemptible nodes works out as a curiousity.
 
 ** Todo
 
