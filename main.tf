@@ -2,9 +2,10 @@ terraform {
   required_providers {
     google = {
       source  = "google"
-      version = "~> 5.29.1"
+      version = "~> 6.26.0"
     }
   }
+  required_version = "1.5.7"
 }
 
 module "project" { 

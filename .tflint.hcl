@@ -1,8 +1,9 @@
-plugin "gcp" {
-  enabled = true
-  version = "0.9.0"
-  source  = "github.com/terraform-linters/tflint-ruleset-google"
+plugin "google" {
+    enabled = true
+    version = "0.31.0"
+    source  = "github.com/terraform-linters/tflint-ruleset-google"
 }
+
 
 # Enable additional rules here
 rule "terraform_deprecated_interpolation" {

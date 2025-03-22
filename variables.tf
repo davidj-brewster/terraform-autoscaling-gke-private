@@ -21,6 +21,7 @@ variable "vpc_name" {
 }
 
 variable "google_apis" {
+  type = list(string)
   description = "Set of extra Google APIs that need to be enabled"
   default = [ 
     "container.googleapis.com",
@@ -35,6 +36,7 @@ variable "google_apis" {
 }
 
 variable "region" {
+  type = string
   description = "The region in which to create the GKE cluster"
   default = "asia-southeast1"
 }
