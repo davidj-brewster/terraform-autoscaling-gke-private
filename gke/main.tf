@@ -39,6 +39,10 @@ resource "google_container_cluster" "primary" {
     }
 
     node_config {
+      workload_metadata_config {
+        node_metadata = "GKE_METADATA_SERVER"
+      }
+
       machine_type = "e2-medium" #2 shared vCPU up to 100%, 4GB memory
       disk_size_gb = 20
       disk_type    = "pd-ssd"
@@ -72,6 +76,9 @@ resource "google_container_node_pool" "pool-spot-e2" {
   }
 
   node_config {
+    workload_metadata_config {
+      node_metadata = "GKE_METADATA_SERVER"
+    }
     spot         = true
     machine_type = "e2-small"
     disk_size_gb = 15
@@ -96,6 +103,9 @@ resource "google_container_node_pool" "pool-preemptible-n4-standard-2" {
   }
 
   node_config {
+    workload_metadata_config {
+      node_metadata = "GKE_METADATA_SERVER"
+    }
     preemptible  = true
     machine_type = "n4-standard-2"
     disk_size_gb = 15
@@ -119,6 +129,9 @@ resource "google_container_node_pool" "pool-spot-n4-standard-2" {
   }
 
   node_config {
+    workload_metadata_config {
+      node_metadata = "GKE_METADATA_SERVER"
+    }
     spot         = true
     machine_type = "n4-standard-2"
     disk_size_gb = 15
