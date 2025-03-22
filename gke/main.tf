@@ -19,7 +19,6 @@ resource "google_container_cluster" "primary" {
   logging_config {
     enable_components = []
   }
-  enable_binary_authorization = true
   network = var.vpc_name
   #subnetwork = var.vpc_subnet
   deletion_protection = false
@@ -43,6 +42,9 @@ resource "google_container_cluster" "primary" {
     name               = "default-node-pool"
     initial_node_count = 0
 
+    management {
+      auto_upgrade = true
+    }
     autoscaling {
       total_min_node_count = 1
       total_max_node_count = 3
@@ -75,6 +77,9 @@ resource "google_container_node_pool" "pool-spot-e2" {
   #   "us-central1-c", #zones not regions
   # ]
 
+  management {
+    auto_upgrade = true
+  }
 
   autoscaling {
     total_min_node_count = 1
@@ -100,6 +105,10 @@ resource "google_container_node_pool" "pool-preemptible-n4-standard-2" {
   name               = "np-preemptible-n4-standard-2"
   initial_node_count = 0
 
+  management {
+    auto_upgrade = true
+  }
+
   autoscaling {
     total_min_node_count = 0
     total_max_node_count = 2
@@ -122,6 +131,10 @@ resource "google_container_node_pool" "pool-spot-n4-standard-2" {
   location           = google_container_cluster.primary.location
   name               = "np-spot-n4-standard-2"
   initial_node_count = 0
+
+  management {
+    auto_upgrade = true
+  }
 
   autoscaling {
     total_min_node_count = 1
