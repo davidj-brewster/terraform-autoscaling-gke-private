@@ -1,5 +1,5 @@
-# terraform-gke-scripts
-Mucking around with terraform scripts to orchestrate different components on GCP, namely an application workload running across a cluster backed by several GKE nodepools. Eventually I'll add an AlloyDB database, external routing, build & deployment automation and some monitoring.
+# terraform-autoscaling-gke-private
+Mucking around with terraform scripts to orchestrate different components on GCP, namely an application workload running across a cluster backed by several GKE nodepools. 
 
 I gave ChatGPT the challenge to give me an interactive / modular learning exercise to get more hands on familiar with both terraform, gcp networking and the details of GKE cluster setup. I also want to see how a mixed GKE cluster with preemptible and non-preemptible nodes works out as a curiousity.
 
@@ -34,3 +34,7 @@ As this is a private cluster, if you want to access it via google cloud shell yo
 ** Cleanup 
 
 `terraform destroy` will uninstall all deployed artifacts *including the GCP project*. If you do accidentally delete a project you can usually recover it for a while on GCP through the console.
+
+** Todo
+
+Eventually I'll add an AlloyDB database, external routing, build & deployment automation and some monitoring. The idea was always to extend this to get some experience with load balancing, cloud build, etc.. but one day :) 
