@@ -1,8 +1,8 @@
 resource "google_project" "default" {
-  name            = var.project_name
-  project_id      = var.project_id
+  name                = var.project_name
+  project_id          = var.project_id
   auto_create_network = false
-  billing_account = var.billing_account
+  billing_account     = var.billing_account
 }
 
 resource "google_project_service" "gcp_services" {
