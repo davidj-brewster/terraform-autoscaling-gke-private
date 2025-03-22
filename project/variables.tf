@@ -1,21 +1,21 @@
-variable google_apis {
-  description ="The list of non-standard installed apis necessary for the project"
-  type = list(string)
-  default = []
+variable "google_apis" {
+  description = "The list of non-standard installed apis necessary for the project"
+  type        = list(string)
+  default     = []
 }
 
-variable project_id {
-  type = string
+variable "project_id" {
+  type        = string
   description = "google project identifier"
 }
 
-variable project_name {
-  type = string
+variable "project_name" {
+  type        = string
   description = "Project name in GCP"
 }
 
-variable billing_account { 
-  type = string
+variable "billing_account" {
+  type        = string
   description = "GCP billing account associatd with the project"
 }
 
