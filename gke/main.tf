@@ -1,14 +1,12 @@
 #todo add dedicated compute service account
 resource "google_container_cluster" "primary" {
-  name     = "private-gke-cluster-hybrid-premptible"
-  location = var.region
+  name                    = "private-gke-cluster-hybrid-premptible"
+  location                = var.region
   enable_kubernetes_alpha = false
-  #todo variables
   resource_labels = {
     environment = "testing"
     team        = "myteam"
   }
-
   release_channel {
     channel = "REGULAR"
   }
