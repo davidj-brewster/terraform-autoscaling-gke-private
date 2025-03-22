@@ -14,7 +14,7 @@ Some special things about this setup
 Google Cloud account obviously with the appropriate IAM permissions to create projects and resources (I use a personal account), gcloud cli for auth login etc.
 I'm running this on a basic setup:
 * homebrew 
-* terraform v1.5.7 on darwin_arm64
+* terraform v1.11.2 on darwin_arm64
 * connect "locally" with kubectl via cloud shell, or using gke-gcloud-auth-plugin
 * provider `registry.terraform.io/hashicorp/google v6.26.0` is the only terraform dependency
 * tflint
