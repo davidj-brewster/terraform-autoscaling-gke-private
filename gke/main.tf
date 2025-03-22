@@ -3,6 +3,9 @@ resource "google_container_cluster" "primary" {
   name     = "private-gke-cluster-hybrid-premptible"
   location = var.region
   enable_kubernetes_alpha = false
+  release_channel {
+    channel = "REGULAR"
+  }
   monitoring_config {
     enable_components = []
   }
