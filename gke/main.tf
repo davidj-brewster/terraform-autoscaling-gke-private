@@ -1,4 +1,4 @@
-w#todo add dedicated compute service account
+#todo add dedicated compute service account
 resource "google_container_cluster" "primary" {
   name     = "private-gke-cluster-hybrid-premptible"
   location = var.region
