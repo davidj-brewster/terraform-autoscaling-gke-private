@@ -1,6 +1,6 @@
 # terraform-autoscaling-gke-private
 Terraform scripts to orchestrate different components on GCP, namely 
-* GCP project crration/deletion with required APIs
+* GCP project lifecycle + API management
 * Private subnet management and enforcement
 * GKE cluster management
 * Mixed non-preemptible and Spot GKE nodepools of different Compute instance types
