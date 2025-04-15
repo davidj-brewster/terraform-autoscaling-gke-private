@@ -11,7 +11,6 @@ variable "project_id" {
 variable "project_name" {
   type        = string
   description = "Project Name"
-  default     = "GCP Terraform Setup Project"
 }
 
 variable "vpc_name" {
@@ -44,12 +43,12 @@ variable "region" {
 variable "vpc_subnet" {
   type        = string
   description = "Subnet name we'll use for GKE"
-  default     = "default-vpc-subnet-gke-us"
+  default     = "default-vpc-subnet-gke"
 }
 
 variable "gke_serviceaccount" {
   type        = string
   description = "Terraform managaed serviceaccount for the compute scope"
-  default     = "svcacct-gke-compute-tfpoc-us"
+  default     = "svcacct-gke-compute-tfpoc"
 }
 
