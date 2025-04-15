@@ -1,5 +1,12 @@
 # terraform-autoscaling-gke-private
-Terraform scripts to orchestrate different components on GCP, namely an application workload running across a cluster backed by several GKE nodepools. Admittedly, this solution works but there is room for improvement around the gke module and probably the networking.
+Terraform scripts to orchestrate different components on GCP, namely 
+* GCP project crration/deletion with required APIs
+* Private subnet management and enforcement
+* GKE cluster management
+* Mixed non-preemptible and Spot GKE nodepools of different Compute instance types
+* Mixed autoscaling and fixed node capacity
+
+Admittedly, this solution works but there is room for improvement around the gke module and probably the networking.
 
 Some special things about this setup 
 - Fully managed by Terraform apply/destroy
@@ -14,7 +21,7 @@ Some special things about this setup
 Google Cloud account obviously with the appropriate IAM permissions to create projects and resources (I use a personal account), gcloud cli for auth login etc.
 I'm running this on a basic setup:
 * homebrew 
-* terraform v1.11.2 on darwin_arm64
+* terraform on darwin_arm64
 * connect "locally" with kubectl via cloud shell, or using gke-gcloud-auth-plugin
 * provider `registry.terraform.io/hashicorp/google v6.26.0` is the only terraform dependency
 * tflint
