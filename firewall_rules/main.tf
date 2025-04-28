@@ -202,3 +202,31 @@ resource "google_compute_firewall" "ingress-within-subnets" {
   }
 }
 
+resource "google_compute_firewall" "allow_ssh" {
+  name    = "allow-ssh-bastian"
+  network = var.public_subnet_name
+
+  allow {
+    protocol = "tcp"
+    ports    = ["22"]
+  }
+
+  source_ranges = [
+    var.allowed_ssh_ips 
+  ]
+  target_tags   = ["bastion"]
+}
+
+resource "google_compute_firewall" "allow_outbound" {
+  name = "allow-outbound-bastian"
+  network = var.public_subnet_name 
+
+  allow {
+    protocol = "all"
+    ports    = ["0-65535"]
+  }
+
+  direction    = "EGRESS"
+  destination_ranges = ["0.0.0.0/0"]
+}
+

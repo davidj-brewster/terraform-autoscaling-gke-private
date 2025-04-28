@@ -13,3 +13,22 @@ variable "vpc_subnet" {
   type        = string
 }
 
+variable allowed_ssh_ips {
+  description = "IPs allowed to access a bastian host to reach the control plane"
+  type = string
+}
+
+variable public_subnet_range {
+  type = string
+  description = "The IPs to assign to the public subnet, which will host the jump host"
+}
+
+variable region { 
+  type = string
+  description = "The region to create public subnet, also where compute instances will get spun up"
+}
+
+variable public_subnet_name {
+  type = string 
+}
+

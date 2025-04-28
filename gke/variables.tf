@@ -29,3 +29,18 @@ variable "gke_serviceaccount" {
   default     = "gke-svcacct-poccluster"
 }
 
+
+variable allowed_ssh_ips {
+  type = string
+  description = "IPs allowed to access a bastian host to reach the control plane"
+}
+
+variable public_subnet_range {
+  type = string
+  description = "The IPs to assign to the public subnet, which will host the jump host"
+}
+
+variable public_subnet_name {
+  type = string 
+}
+

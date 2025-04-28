@@ -19,14 +19,14 @@ resource "google_container_cluster" "primary" {
   logging_config {
     enable_components = []
   }
-  network = var.vpc_name
-  #subnetwork = var.vpc_subnet
+  network    = var.vpc_name
+  subnetwork = var.vpc_subnet
   deletion_protection = false
 
   remove_default_node_pool = false
 
   private_cluster_config {
-    enable_private_endpoint = true
+    enable_private_endpoint = false
     enable_private_nodes    = true
     master_ipv4_cidr_block  = "172.16.0.0/28"
   }
@@ -35,6 +35,10 @@ resource "google_container_cluster" "primary" {
     cidr_blocks {
       cidr_block   = "10.0.0.0/8"
       display_name = "vpc-access"
+    }
+    cidr_blocks { 
+        cidr_block = var.public_subnet_range
+        display_name = var.public_subnet_name
     }
   }
 

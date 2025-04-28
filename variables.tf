@@ -52,3 +52,21 @@ variable "gke_serviceaccount" {
   default     = "svcacct-gke-compute-tfpoc"
 }
 
+variable "allowed_ssh_ips" {
+  description = "IPs allowed to access a bastian host to reach the control plane"
+  type = string
+  default = "127.0.0.1"
+}
+
+variable "public_subnet_range" { 
+  type = string
+  default = "10.3.0.0/24"
+  description = "The IPs to assign to the public subnet, which will host the jump host"
+}
+
+variable "public_subnet_name" {
+  type = string
+  default = "vpc-subnet-pub"
+}
+
+
