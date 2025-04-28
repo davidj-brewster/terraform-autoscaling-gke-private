@@ -22,7 +22,6 @@ module "vpc" {
   vpc_subnet = var.vpc_subnet
   source     = "./vpc"
   depends_on = [module.project]
-  vpc_name = var.vpc_name
   allowed_ssh_ips = var.allowed_ssh_ips
   region = var.region
   public_subnet_range = var.public_subnet_range
