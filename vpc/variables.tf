@@ -8,10 +8,10 @@ variable "vpc_name" {
   description = "Identifier of the VPC network"
 }
 
-variable "vpc_subnet" {
-  description = "The name of the subnet"
-  type        = string
-}
+#variable "vpc_subnet" {
+#  description = "The name of the subnet"
+#  type        = string
+#}
 
 variable allowed_ssh_ips {
   description = "IPs allowed to access a bastian host to reach the control plane"
